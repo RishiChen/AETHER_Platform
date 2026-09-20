@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="640" height="640">
+  <!-- Industrial sheds & tank expansion -->
+  <rect x="220" y="240" width="140" height="90" fill="rgba(239, 68, 68, 0.35)" stroke="#ef4444" stroke-width="2"/>
+  <circle cx="420" cy="270" r="35" fill="rgba(249, 115, 22, 0.35)" stroke="#f97316" stroke-width="2"/>
+  <circle cx="420" cy="350" r="35" fill="rgba(249, 115, 22, 0.35)" stroke="#f97316" stroke-width="2"/>
+  <rect x="200" y="210" width="280" height="200" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <rect x="200" y="185" width="170" height="22" rx="3" fill="#0b1120" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="206" y="200" fill="#ef4444" font-family="monospace" font-size="11" font-weight="bold">INDUSTRIAL EXPANSION</text>
+</svg>

@@ -1,0 +1,158 @@
+{
+    "1": {
+        "image_id": 1,
+        "filename": "loc-cleared-2020.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\loc-cleared-2020.jpg"
+    },
+    "2": {
+        "image_id": 2,
+        "filename": "loc-cleared-2022.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\loc-cleared-2022.jpg"
+    },
+    "3": {
+        "image_id": 3,
+        "filename": "loc-cleared-2024.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\loc-cleared-2024.jpg"
+    },
+    "4": {
+        "image_id": 4,
+        "filename": "loc-highway-2020.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\loc-highway-2020.jpg"
+    },
+    "5": {
+        "image_id": 5,
+        "filename": "loc-highway-2022.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\loc-highway-2022.jpg"
+    },
+    "6": {
+        "image_id": 6,
+        "filename": "loc-highway-2024.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\loc-highway-2024.jpg"
+    },
+    "7": {
+        "image_id": 7,
+        "filename": "loc-industry-2020.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\loc-industry-2020.jpg"
+    },
+    "8": {
+        "image_id": 8,
+        "filename": "loc-industry-2022.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\loc-industry-2022.jpg"
+    },
+    "9": {
+        "image_id": 9,
+        "filename": "loc-industry-2024.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\loc-industry-2024.jpg"
+    },
+    "10": {
+        "image_id": 10,
+        "filename": "loc-river-2020.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\loc-river-2020.jpg"
+    },
+    "11": {
+        "image_id": 11,
+        "filename": "loc-river-2022.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\loc-river-2022.jpg"
+    },
+    "12": {
+        "image_id": 12,
+        "filename": "loc-river-2024.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\loc-river-2024.jpg"
+    },
+    "13": {
+        "image_id": 13,
+        "filename": "loc-water-2020.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\loc-water-2020.jpg"
+    },
+    "14": {
+        "image_id": 14,
+        "filename": "loc-water-2022.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\loc-water-2022.jpg"
+    },
+    "15": {
+        "image_id": 15,
+        "filename": "loc-water-2024.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\loc-water-2024.jpg"
+    },
+    "16": {
+        "image_id": 16,
+        "filename": "test_2020_delhi.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\test_2020_delhi.jpg"
+    },
+    "17": {
+        "image_id": 17,
+        "filename": "test_2024_delhi.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\test_2024_delhi.jpg"
+    },
+    "18": {
+        "image_id": 18,
+        "filename": "test_s2.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\test_s2.jpg"
+    },
+    "19": {
+        "image_id": 19,
+        "filename": "JAMMU_2024.jpg.jpeg",
+        "path": "E:\\MyDesktop\\SRPCP\\backend_model\\AI\\semantic_search\\data\\images\\JAMMU_2024.jpg.jpeg"
+    },
+    "20": {
+        "image_id": 20,
+        "filename": "JAMMU_2026.jpg.jpeg",
+        "path": "E:\\MyDesktop\\SRPCP\\backend_model\\AI\\semantic_search\\data\\images\\JAMMU_2026.jpg.jpeg"
+    },
+    "21": {
+        "image_id": 21,
+        "filename": "loc-kargil-2020.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\loc-kargil-2020.jpg",
+        "tags": [
+            "Satellite Scene",
+            "Earth Observation",
+            "Local Imagery Archive"
+        ]
+    },
+    "22": {
+        "image_id": 22,
+        "filename": "loc-kargil-2022.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\loc-kargil-2022.jpg",
+        "tags": [
+            "Satellite Scene",
+            "Earth Observation",
+            "Local Imagery Archive"
+        ]
+    },
+    "23": {
+        "image_id": 23,
+        "filename": "loc-kargil-2024.jpg",
+        "path": "E:\\MyDesktop\\SRPCP\\Frontend\\imagery\\loc-kargil-2024.jpg",
+        "tags": [
+            "Satellite Scene",
+            "Earth Observation",
+            "Local Imagery Archive"
+        ]
+    },
+    "24": {
+        "image_id": 24,
+        "filename": "kargil_2024-06-30.jpg",
+        "path": "E:\\MyDesktop\\SRPCP - Copy\\AETHER\\data\\before\\kargil_2024-06-30.jpg",
+        "tags": [
+            "Satellite Scene",
+            "Earth Observation",
+            "Local Imagery Archive"
+        ],
+        "title": "Kargil 2024 06 30",
+        "source": "Copernicus Sentinel-2",
+        "sensor": "MSI Level-2A BOA"
+    },
+    "25": {
+        "image_id": 25,
+        "filename": "kargil_2026-06-30.jpg",
+        "path": "E:\\MyDesktop\\SRPCP - Copy\\AETHER\\data\\after\\kargil_2026-06-30.jpg",
+        "tags": [
+            "Satellite Scene",
+            "Earth Observation",
+            "Local Imagery Archive"
+        ],
+        "title": "Kargil 2026 06 30",
+        "source": "Copernicus Sentinel-2",
+        "sensor": "MSI Level-2A BOA"
+    }
+}

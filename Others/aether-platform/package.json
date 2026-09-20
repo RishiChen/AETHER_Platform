@@ -1,0 +1,23 @@
+{
+  "name": "aether-platform",
+  "version": "1.0.0",
+  "description": "AETHER — Adaptive Earth-observation Temporal Hyper-semantic Engine for Retrieval (SIH 2026 Problem Statement 26227)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "keywords": [
+    "earth-observation",
+    "satellite-imagery",
+    "copernicus",
+    "sentinel-2",
+    "geospatial-intelligence",
+    "semantic-retrieval",
+    "change-detection"
+  ],
+  "author": "AETHER Intelligence Systems",
+  "license": "ISC"
+}

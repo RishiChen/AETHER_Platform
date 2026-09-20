@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AETHER — Earth Observation Intelligence Platform</title>
+  <meta name="description" content="Adaptive Earth-observation Temporal Hyper-semantic Engine for Retrieval. SIH 2026 Problem Statement 26227." />
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Leaflet CSS for Map Workspace (Offline local bundle) -->
+  <link rel="stylesheet" href="/css/leaflet.css" />
+
+  <!-- AETHER Stylesheets -->
+  <link rel="stylesheet" href="/css/variables.css" />
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/pages.css" />
+</head>
+<body>
+
+  <!-- GLOBAL PERSISTENT NAVIGATION -->
+  <header class="nav-header">
+    <div class="brand-wrapper" title="AETHER - Return to Overview">
+      <div class="brand-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="m4.93 4.93 4.24 4.24"></path>
+          <path d="m14.83 9.17 4.24-4.24"></path>
+          <path d="m14.83 14.83 4.24 4.24"></path>
+          <path d="m9.17 14.83-4.24 4.24"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+      </div>
+      <div class="brand-title-group">
+        <div class="brand-title">
+          AETHER
+          <span class="brand-badge">PS 26227</span>
+        </div>
+        <span class="brand-subtitle">Adaptive Earth-observation Temporal Hyper-semantic Engine</span>
+      </div>
+    </div>
+
+    <!-- Nav Links (4 Pages Maximum) -->
+    <nav>
+      <ul class="nav-menu">
+        <li>
+          <a class="nav-link active" data-page="overview" href="#overview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            Overview
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" data-page="search" href="#search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            Semantic Search
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" data-page="change" href="#change">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"></path><path d="m17 5-5-3-5 3"></path><path d="m17 19-5 3-5-3"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            Change Analysis
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" data-page="about" href="#about">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            About
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- System Status Bar (Right) -->
+    <div class="nav-status-group">
+      <div class="status-pill" title="System running fully disconnected from commercial external clouds">
+        <div class="status-dot"></div>
+        OFFLINE MODE · LOCAL PROCESSING
+      </div>
+      <div class="archive-pill" title="Local Indexed Satellite Archive Volume">
+        ARCHIVE: <span>1.4 TB</span>
+      </div>
+      <button class="icon-btn" id="settings-modal-btn" title="System Configuration & Diagnostics">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="page-container">
+
+    <!-- ========================================================
+         PAGE 1: OVERVIEW / HOME
+         ======================================================== -->
+    <section class="page-view active" id="page-overview">
+      <div class="overview-page">
+
+        <!-- Hero Section -->
+        <div class="hero-section">
+          <div class="hero-content">
+            <div class="hero-badge-row">
+              <span class="badge badge-cyan">SIH 2026 PROTOTYPE · PROBLEM STATEMENT 26227</span>
+            </div>
+            <h1 class="hero-headline">
+              Search Earth by Meaning.<br />
+              <span class="text-gradient">Detect Change Through Time.</span>
+            </h1>
+            <p class="hero-subtext">
+              AETHER is an offline Earth-observation intelligence system that helps analysts search satellite imagery semantically, discover similar locations, and identify meaningful changes across time.
+            </p>
+            <div class="hero-cta-group">
+              <button class="btn btn-primary btn-lg" id="hero-cta-search">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                Explore Semantic Search
+              </button>
+              <button class="btn btn-secondary btn-lg" id="hero-cta-change">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"></path><path d="m17 5-5-3-5 3"></path><path d="m17 19-5 3-5-3"></path></svg>
+                Analyze Change
+              </button>
+            </div>
+          </div>
+
+          <!-- Hero Satellite Visual Box -->
+          <div class="hero-visual-card">
+            <div class="hero-sat-bg"></div>
+            <div class="hero-radar-sweep"></div>
+            <div class="hero-hud-reticle">
+              <div style="width: 8px; height: 8px; background: #00d4ff; border-radius: 50%;"></div>
+            </div>
+            <div class="hero-hud-coords">
+              LAT 28°32'42" N · LON 77°18'36" E
+            </div>
+            <div class="hero-hud-sensor">
+              COPERNICUS SENTINEL-2B · L2A BOA
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Key Capabilities -->
+        <div class="capabilities-section">
+          <div class="section-header-row">
+            <h2 class="section-title">Core Intelligence Capabilities</h2>
+            <p class="section-desc">Unified multi-modal semantic retrieval and rigorous false-alarm suppression for Earth observation data.</p>
+          </div>
+          <div class="capabilities-grid">
+            <div class="capability-card">
+              <div class="capability-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              </div>
+              <h3 class="capability-title">Semantic Retrieval</h3>
+              <p class="capability-desc">Search satellite imagery using natural-language queries rather than only coordinates and metadata.</p>
+            </div>
+            <div class="capability-card">
+              <div class="capability-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+              </div>
+              <h3 class="capability-title">Image-to-Image Discovery</h3>
+              <p class="capability-desc">Provide an image and discover visually or semantically similar locations across the archive.</p>
+            </div>
+            <div class="capability-card">
+              <div class="capability-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </div>
+              <h3 class="capability-title">Temporal Change Analysis</h3>
+              <p class="capability-desc">Compare imagery from different dates and identify meaningful structural and spatial changes.</p>
+            </div>
+            <div class="capability-card">
+              <div class="capability-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+              <h3 class="capability-title">False-Alarm Reduction</h3>
+              <p class="capability-desc">Account for clouds, haze, shadows, seasonal variation, sensor differences and image misalignment.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Horizontal Visual Workflow -->
+        <div class="workflow-section">
+          <div class="section-header-row">
+            <h2 class="section-title">AETHER End-to-End Workflow</h2>
+            <p class="section-desc">From natural-language inquiry to analyst-reviewed intelligence.</p>
+          </div>
+          <div class="workflow-pipeline">
+            <div class="workflow-step-node">
+              <div class="workflow-node-circle">01</div>
+              <div class="workflow-node-label">Natural-language query</div>
+            </div>
+            <div class="workflow-connector">→</div>
+            <div class="workflow-step-node">
+              <div class="workflow-node-circle">02</div>
+              <div class="workflow-node-label">Semantic retrieval</div>
+            </div>
+            <div class="workflow-connector">→</div>
+            <div class="workflow-step-node">
+              <div class="workflow-node-circle">03</div>
+              <div class="workflow-node-label">Candidate locations</div>
+            </div>
+            <div class="workflow-connector">→</div>
+            <div class="workflow-step-node">
+              <div class="workflow-node-circle">04</div>
+              <div class="workflow-node-label">Select location</div>
+            </div>
+            <div class="workflow-connector">→</div>
+            <div class="workflow-step-node">
+              <div class="workflow-node-circle">05</div>
+              <div class="workflow-node-label">Compare dates</div>
+            </div>
+            <div class="workflow-connector">→</div>
+            <div class="workflow-step-node">
+              <div class="workflow-node-circle">06</div>
+              <div class="workflow-node-label">Detect meaningful change</div>
+            </div>
+            <div class="workflow-connector">→</div>
+            <div class="workflow-step-node">
+              <div class="workflow-node-circle">07</div>
+              <div class="workflow-node-label">Analyst review</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example Mission Card -->
+        <div class="mission-card">
+          <div class="mission-left">
+            <div class="mission-tag-row">
+              <span class="badge badge-amber">INTERACTIVE SCENARIO</span>
+              <span class="badge badge-dark">COPERNICUS ARCHIVE</span>
+            </div>
+            <h2 class="mission-title">Example Mission: “Find new structures near a river”</h2>
+            <div class="mission-query-box">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <span>Query: “New structures near a river”</span>
+            </div>
+            <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
+              Surfaces high-probability structural emergence along river meander corridors. Filters out seasonal riverbank vegetation variations and highlights newly erected concrete foundations.
+            </p>
+            <div>
+              <button class="btn btn-primary" id="try-scenario-btn">
+                Try this scenario
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+          <div class="mission-preview-wrapper">
+            <img class="mission-preview-img" src="/imagery/loc-river-2024.jpg" alt="Mission Preview" />
+            <img class="mission-preview-mask" src="/imagery/loc-river-mask.svg" alt="Target Mask" />
+            <span class="mission-preview-badge">CANDIDATE 01 · 94% CONFIDENCE</span>
+          </div>
+        </div>
+
+        <!-- Trust Indicators Bottom -->
+        <div class="trust-indicators-row">
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+            </div>
+            <div class="trust-info">
+              <div class="trust-title">Offline Ready</div>
+              <div class="trust-desc">Designed for local/on-premises operation without external cloud dependencies.</div>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <div class="trust-info">
+              <div class="trust-title">Confidence-Aware</div>
+              <div class="trust-desc">Every detection includes calibrated confidence metrics for human analyst review.</div>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            </div>
+            <div class="trust-info">
+              <div class="trust-title">Evidence & Provenance</div>
+              <div class="trust-desc">Results retain full cryptographic lineage back to raw satellite telemetry and sensor acquisitions.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         PAGE 2: SEMANTIC SEARCH
+         ======================================================== -->
+    <section class="page-view" id="page-search">
+      <div class="search-page">
+
+        <!-- Left Column: Search & Filters -->
+        <div class="search-sidebar">
+          
+          <!-- Search Console Box -->
+          <div class="search-console">
+            <div class="search-mode-tabs">
+              <button class="search-tab-btn active" data-mode="text">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                Text Query
+              </button>
+              <button class="search-tab-btn" data-mode="image">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                Image Query
+              </button>
+            </div>
+
+            <!-- Text Query Controls -->
+            <div id="text-query-controls" style="display: flex; flex-direction: column; gap: 10px;">
+              <div class="search-input-wrapper">
+                <input type="text" class="search-input" id="search-input" placeholder="Describe what you are looking for..." value="New structures near a river" />
+                <button class="btn btn-primary" id="search-btn">
+                  Search
+                </button>
+              </div>
+
+              <!-- Suggestion Chips -->
+              <div class="suggestion-container">
+                <span class="suggestion-label">Suggestions:</span>
+                <button class="suggestion-chip" data-query="New structures near a river">New structures near a river</button>
+                <button class="suggestion-chip" data-query="Roads developed in an open area">Roads developed in an open area</button>
+                <button class="suggestion-chip" data-query="Large industrial structures">Large industrial structures</button>
+                <button class="suggestion-chip" data-query="Cleared land near a settlement">Cleared land near a settlement</button>
+                <button class="suggestion-chip" data-query="Water extent variation">Water extent variation</button>
+              </div>
+            </div>
+
+            <!-- Image Query Dropzone -->
+            <div class="image-query-dropzone" id="image-query-dropzone">
+              <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              <div class="dropzone-title">Drop satellite images here or Choose Images</div>
+              <div class="dropzone-sub">Find visually similar common locations across the offline archive.</div>
+              <input type="file" id="image-file-input" style="display: none;" accept="image/*" multiple />
+              <button class="btn btn-secondary btn-sm" onclick="document.getElementById('image-file-input').click();">
+                Choose Image Files
+              </button>
+              <div class="sample-image-chips">
+                <span style="font-size: 10px; color: var(--text-muted); align-self: center;">Test Chips:</span>
+                <button class="sample-img-btn" data-sample="river">Bridge / River</button>
+                <button class="sample-img-btn" data-sample="highway">Expressway</button>
+                <button class="sample-img-btn" data-sample="water">Reservoir</button>
+                <button class="sample-img-btn" data-sample="industry">Port Terminal</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Collapsible Filters -->
+          <div class="filter-section">
+            <div class="filter-header" id="filter-header-toggle">
+              <span class="filter-header-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+                Archive Filters
+              </span>
+              <span class="filter-arrow" style="font-size: 10px; color: var(--text-muted);">▲</span>
+            </div>
+            <div class="filter-body" id="filter-body-content">
+              
+              <!-- Data Sources -->
+              <div class="filter-group">
+                <div class="filter-label">Data Source</div>
+                <div class="checkbox-grid">
+                  <label class="custom-checkbox">
+                    <input type="checkbox" class="source-checkbox filter-checkbox" value="Sentinel-2" checked />
+                    Sentinel-2 (MSI)
+                  </label>
+                  <label class="custom-checkbox">
+                    <input type="checkbox" class="source-checkbox filter-checkbox" value="Sentinel-1" checked />
+                    Sentinel-1 (SAR)
+                  </label>
+                  <label class="custom-checkbox">
+                    <input type="checkbox" class="source-checkbox filter-checkbox" value="Landsat" checked />
+                    Landsat (OLI)
+                  </label>
+                  <label class="custom-checkbox">
+                    <input type="checkbox" class="source-checkbox filter-checkbox" value="Bhuvan" />
+                    Bhuvan / NRSC
+                  </label>
+                </div>
+              </div>
+
+              <!-- Quality / Cloud Cover -->
+              <div class="filter-group">
+                <div class="filter-label">
+                  <span>Cloud Threshold</span>
+                  <span id="cloud-value-display" style="color: var(--accent-cyan);">15%</span>
+                </div>
+                <div class="range-slider-wrapper">
+                  <input type="range" class="range-slider" id="cloud-slider" min="0" max="50" value="15" />
+                  <div class="range-values">
+                    <span>0% (Clear)</span>
+                    <span>25%</span>
+                    <span>50%</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Result Type -->
+              <div class="filter-group">
+                <div class="filter-label">Result Type</div>
+                <div style="display: flex; gap: 8px;">
+                  <label class="custom-checkbox">
+                    <input type="radio" name="resultType" value="all" class="filter-radio" checked />
+                    All Matches
+                  </label>
+                  <label class="custom-checkbox">
+                    <input type="radio" name="resultType" value="semantic" class="filter-radio" />
+                    Semantic Only
+                  </label>
+                  <label class="custom-checkbox">
+                    <input type="radio" name="resultType" value="change" class="filter-radio" />
+                    Potential Change
+                  </label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Ranked Results Feed -->
+          <div>
+            <div class="results-header">
+              <span class="results-count" id="results-count-display">5 CANDIDATES FOUND</span>
+              <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">SORTED BY CONFIDENCE</span>
+            </div>
+            <div class="results-feed" id="results-feed">
+              <!-- Rendered via search.js -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Map Workspace -->
+        <div class="search-map-container">
+          <div class="map-workspace">
+            <div id="aether-map"></div>
+
+            <!-- Map HUD Coordinates Overlay -->
+            <div class="map-hud-overlay">
+              <div class="map-hud-item">LAT: <span id="hud-lat">28.5450° N</span></div>
+              <div class="map-hud-item">LON: <span id="hud-lon">77.3100° E</span></div>
+              <div class="map-hud-item">ZOOM: <span id="hud-zoom">13</span></div>
+              <div class="map-hud-item">SRS: <span>EPSG:3857</span></div>
+            </div>
+
+            <!-- Map Layer Switcher -->
+            <div class="map-layer-selector">
+              <button class="layer-btn active" data-layer="s2">Sentinel-2 True Color</button>
+              <button class="layer-btn" data-layer="satellite">High-Res Satellite</button>
+              <button class="layer-btn" data-layer="dark">Dark Basemap</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Detail Drawer (Slide-In from Right) -->
+      <div class="drawer-backdrop" id="drawer-backdrop"></div>
+      <div class="detail-drawer" id="location-detail-drawer">
+        <div class="drawer-header">
+          <div class="drawer-header-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            Location Intelligence
+          </div>
+          <button class="icon-btn" id="drawer-close-btn" title="Close Drawer">✕</button>
+        </div>
+
+        <div class="drawer-content">
+          <div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+              <h2 id="drawer-title" style="font-size: 16px; font-weight: 700;">Location Title</h2>
+              <span class="badge badge-cyan" id="drawer-match-score">94% MATCH</span>
+            </div>
+            <div class="meta-grid">
+              <div class="meta-item">
+                <span class="meta-key">Coordinates</span>
+                <span class="meta-val" id="drawer-coords-latlon">28.545°N, 77.310°E</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-key">MGRS Grid</span>
+                <span class="meta-val" id="drawer-coords-mgrs">43RGR303576</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-key">Source Archive</span>
+                <span class="meta-val" id="drawer-source">Copernicus Sentinel-2</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-key">Instrument Sensor</span>
+                <span class="meta-val" id="drawer-sensor">MSI Level-2A BOA</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-key">Cloud Probability</span>
+                <span class="meta-val" id="drawer-cloud">0.3%</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-key">Sun Zenith</span>
+                <span class="meta-val" id="drawer-sun">32.1°</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="drawer-section-title">Spectral & Spatial Tags</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px;" id="drawer-tags-container">
+              <!-- Tags rendered here -->
+            </div>
+          </div>
+
+          <div>
+            <div class="drawer-section-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              Available Temporal Imagery (2020 → 2024)
+            </div>
+            <div class="timeline-strip" id="drawer-timeline-strip">
+              <!-- Rendered via provenance.js -->
+            </div>
+          </div>
+        </div>
+
+        <div class="drawer-footer">
+          <button class="btn btn-primary" id="drawer-compare-btn" style="flex: 1;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"></path><path d="m17 5-5-3-5 3"></path><path d="m17 19-5 3-5-3"></path></svg>
+            Compare Dates
+          </button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         PAGE 3: CHANGE ANALYSIS
+         ======================================================== -->
+    <section class="page-view" id="page-change">
+      <div class="change-page">
+
+        <!-- Header -->
+        <div class="change-page-header">
+          <div class="change-header-left">
+            <h1 class="change-page-title">Multi-Temporal Change Analysis</h1>
+            <p class="change-page-sub">Compare the same location across time and identify meaningful structural changes.</p>
+          </div>
+          <div id="change-review-badge">
+            <span class="badge badge-dark">PENDING ANALYST REVIEW</span>
+          </div>
+        </div>
+
+        <!-- Location Intelligence Bar -->
+        <div class="location-summary-card">
+          <div class="loc-badge-group">
+            <div class="loc-name-lg" id="change-loc-title">Yamuna River Corridor - Sector 4B</div>
+            <div class="loc-coords-mono" id="change-loc-coords">28°32'42" N, 77°18'36" E (43RGR303576)</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 20px;">
+            <div>
+              <div style="font-size: 10px; font-family: var(--font-mono); color: var(--text-muted); text-transform: uppercase;">Platform / Sensor</div>
+              <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);" id="change-loc-sensor">Copernicus Sentinel-2 MSI (Level-2A BOA)</div>
+            </div>
+            <div>
+              <div style="font-size: 10px; font-family: var(--font-mono); color: var(--text-muted); text-transform: uppercase;">Detection Confidence</div>
+              <div style="font-size: 15px; font-weight: 700; color: var(--accent-cyan); font-family: var(--font-mono);" id="change-overall-conf">94%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Date Selection Row -->
+        <div class="date-selector-row">
+          <div class="date-pick-card">
+            <span class="date-label">BEFORE ACQUISITION</span>
+            <select class="date-select-input" id="before-date-select">
+              <option value="2020" selected>14 March 2020 (Sentinel-2A)</option>
+              <option value="2022">18 May 2022 (Sentinel-2B)</option>
+            </select>
+          </div>
+          <div class="date-compare-badge" id="date-compare-badge">
+            COMPARE DATES · 1,622 DAYS ELAPSED
+          </div>
+          <div class="date-pick-card">
+            <span class="date-label">AFTER ACQUISITION</span>
+            <select class="date-select-input" id="after-date-select">
+              <option value="2024" selected>22 August 2024 (Sentinel-2B)</option>
+              <option value="2022">18 May 2022 (Sentinel-2B)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Viewer Toolbar -->
+        <div class="viewer-mode-bar">
+          <div class="mode-btn-group">
+            <button class="btn btn-secondary btn-sm mode-btn active" data-mode="swipe">Swipe Slider</button>
+            <button class="btn btn-secondary btn-sm mode-btn" data-mode="split">Split View</button>
+            <button class="btn btn-secondary btn-sm mode-btn" data-mode="flicker">Flicker (800ms)</button>
+            <button class="btn btn-secondary btn-sm mode-btn" data-mode="overlay">Change Overlay</button>
+          </div>
+          <div id="overlay-opacity-controls" style="display: none; align-items: center; gap: 8px;">
+            <span style="font-size: 11px; font-family: var(--font-mono); color: var(--text-muted);">Mask Opacity:</span>
+            <input type="range" id="mask-opacity-slider" min="0" max="100" value="80" style="width: 85px; accent-color: var(--accent-cyan);" />
+            <span id="mask-opacity-val" style="font-size: 11px; font-family: var(--font-mono); color: var(--accent-cyan); font-weight: 700; min-width: 32px;">80%</span>
+          </div>
+          <div id="viewer-instruction-text" style="font-size: 11px; font-family: var(--font-mono); color: var(--text-muted);">
+            DRAG DIVIDER OR CLICK VIEWER TO COMPARE
+          </div>
+        </div>
+
+        <!-- Draggable Satellite Comparison Viewer -->
+        <div class="comparison-container" id="comparison-container">
+          <!-- Before Image Layer (Left Pane in Split / Top Wipe Layer in Swipe) -->
+          <div class="before-image-wrapper" id="before-image-wrapper">
+            <div class="split-pane-tag tag-before"><span>&bull;</span> BASELINE FULL SCENE</div>
+            <img class="comparison-image" id="comparison-before-img" src="/imagery/loc-river-2020.jpg" alt="Before Satellite Capture" />
+            <span class="viewer-label label-before" id="viewer-label-before">BEFORE · 14 MARCH 2020</span>
+            <div class="split-crosshair" id="split-crosshair-before"></div>
+          </div>
+
+          <!-- After Image Layer (Right Pane in Split / Base Layer in Swipe) -->
+          <div class="comparison-image-pane after-pane" id="after-image-wrapper">
+            <div class="split-pane-tag tag-after"><span>&bull;</span> TARGET FULL SCENE</div>
+            <img class="comparison-image" id="comparison-after-img" src="/imagery/loc-river-2024.jpg" alt="After Satellite Capture" />
+            <span class="viewer-label label-after" id="viewer-label-after">AFTER · 22 AUGUST 2024</span>
+            <div class="split-crosshair" id="split-crosshair-after"></div>
+          </div>
+
+          <!-- Draggable Divider -->
+          <div class="comparison-divider" id="comparison-divider">
+            <div class="divider-handle">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Change Mask Overlay -->
+          <div class="change-mask-layer" id="change-mask-layer">
+            <img id="change-mask-img" src="/imagery/masks/river_change_mask.png" alt="" style="width: 100%; height: 100%; object-fit: cover; border: 0; outline: none; display: block;" onerror="this.onerror=null; this.src='/imagery/masks/river_change_mask.png';" />
+          </div>
+
+          <!-- Interactive Vector Highlight Layer -->
+          <svg class="change-vector-svg-layer" id="change-vector-svg-layer" viewBox="0 0 100 100" preserveAspectRatio="none" style="display: none;">
+          </svg>
+
+          <!-- Compass & Scale Bar HUD elements on bottom-right of viewer -->
+          <div class="overlay-spatial-hud" id="overlay-spatial-hud" style="display: none;">
+            <div class="compass-rose">
+              <svg width="44" height="44" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" fill="rgba(10, 15, 25, 0.75)" stroke="rgba(0,245,255,0.5)" stroke-width="2"/>
+                <polygon points="50,12 56,44 50,40 44,44" fill="#ff2626"/>
+                <polygon points="50,88 56,56 50,60 44,56" fill="#e2e8f0"/>
+                <polygon points="12,50 44,44 40,50 44,56" fill="#e2e8f0"/>
+                <polygon points="88,50 56,44 60,50 56,56" fill="#e2e8f0"/>
+                <text x="50" y="24" text-anchor="middle" fill="#ff2626" font-size="12" font-weight="bold" font-family="monospace">N</text>
+                <text x="50" y="82" text-anchor="middle" fill="#e2e8f0" font-size="10" font-family="monospace">S</text>
+                <text x="22" y="53" text-anchor="middle" fill="#e2e8f0" font-size="10" font-family="monospace">W</text>
+                <text x="78" y="53" text-anchor="middle" fill="#e2e8f0" font-size="10" font-family="monospace">E</text>
+              </svg>
+            </div>
+            <div class="scale-bar-widget">
+              <div class="scale-ticks">
+                <span>0</span><span>125</span><span>250</span><span>375</span><span>500 m</span>
+              </div>
+              <div class="scale-line"></div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- 2-Column Analysis Grid -->
+        <div class="analysis-grid">
+          
+          <!-- Left Column: Detected Changes & Summary -->
+          <div class="analysis-col">
+            
+            <!-- Detected Changes Breakdown -->
+            <div class="detected-changes-card">
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <h2 style="font-size: 14px; font-weight: 600;">Detected Change Vectors</h2>
+                <span class="badge badge-red" id="detected-vectors-badge">ANALYZING VECTORS...</span>
+              </div>
+              <div id="detected-changes-list" style="display: flex; flex-direction: column; gap: 8px;">
+                <!-- Rendered via change-viewer.js -->
+              </div>
+            </div>
+
+            <!-- Meaningful Change Summary Card -->
+            <div class="detected-changes-card" style="border-left: 4px solid var(--accent-cyan);">
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <h3 style="font-size: 14px; font-weight: 600; color: var(--accent-cyan);" id="change-primary-type">
+                  Meaningful Change Detected
+                </h3>
+                <span class="badge badge-teal">SIGNIFICANT</span>
+              </div>
+              <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;" id="change-summary-text">
+                A new structural footprint appears in the selected area between the two acquisition dates.
+              </p>
+              <div class="meta-grid" style="margin-top: 4px;">
+                <div class="meta-item">
+                  <span class="meta-key">Affected Area</span>
+                  <span class="meta-val" id="change-affected-area">~14,250 m²</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-key">Spectral Indicator</span>
+                  <span class="meta-val">+0.42 NDBI Index</span>
+                </div>
+              </div>
+              <div style="margin-top: 6px;">
+                <button class="btn btn-secondary btn-sm" id="view-evidence-btn">
+                  View Evidence & Provenance
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right Column: False-Alarm Suppression Checks & AI Change Detection Output Card -->
+          <div class="analysis-col">
+            <div class="false-alarm-card">
+              <div class="false-alarm-header">
+                <div>
+                  <h2 style="font-size: 14px; font-weight: 600;">Why This Change is Meaningful</h2>
+                  <div style="font-size: 11px; color: var(--text-muted);">False-Alarm Suppression Verification Audit</div>
+                </div>
+                <span class="badge badge-teal" id="false-alarm-risk-badge">RISK: LOW</span>
+              </div>
+              <div id="false-alarm-checks-list" style="display: flex; flex-direction: column; gap: 6px;">
+                <!-- Checks rendered via change-viewer.js -->
+              </div>
+              <div style="padding-top: 8px; border-top: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; font-size: 11px; font-family: var(--font-mono);">
+                <span style="color: var(--text-muted);">Calculated False-Alarm Index:</span>
+                <span style="color: var(--accent-teal); font-weight: 700;" id="false-alarm-risk-score">Score: 0.06 / 1.00</span>
+              </div>
+            </div>
+
+            <!-- Sleek Tech Dark-Blue AI Change Detection Output Card -->
+            <div class="ai-output-card" id="ai-output-card">
+              <div class="ai-output-header">
+                <div>
+                  <h2 class="ai-output-title">AI CHANGE DETECTION OUTPUT</h2>
+                  <div class="ai-output-subtitle" id="hud-comp-dates">Comparison: 14 Mar 2020 vs 22 Aug 2024</div>
+                </div>
+                <span class="badge badge-teal" id="hud-overall-conf-badge">92.4% CONF</span>
+              </div>
+
+              <!-- Change Legend -->
+              <div class="ai-output-section">
+                <div class="ai-section-label">CHANGE LEGEND</div>
+                <div class="ai-legend-grid">
+                  <div class="ai-legend-item">
+                    <span class="hud-color-swatch sw-red"></span>
+                    <span>New Construction / Built-up</span>
+                  </div>
+                  <div class="ai-legend-item">
+                    <span class="hud-color-swatch sw-yellow"></span>
+                    <span>Land Clearing / Bare Soil</span>
+                  </div>
+                  <div class="ai-legend-item">
+                    <span class="hud-color-swatch sw-cyan"></span>
+                    <span>Road / Infrastructure</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Categorical Summary -->
+              <div class="ai-output-section">
+                <div class="ai-section-label">CATEGORICAL SUMMARY</div>
+                <div class="ai-stats-grid">
+                  <div class="ai-stat-card card-red">
+                    <span class="stat-icon">🏗️</span>
+                    <div class="stat-body">
+                      <span class="stat-label">New Built-up Area</span>
+                      <span class="stat-value val-red" id="hud-builtup-val">14.32 ha</span>
+                    </div>
+                  </div>
+                  <div class="ai-stat-card card-yellow">
+                    <span class="stat-icon">🚜</span>
+                    <div class="stat-body">
+                      <span class="stat-label">Land Cleared / Soil</span>
+                      <span class="stat-value val-yellow" id="hud-clearing-val">22.18 ha</span>
+                    </div>
+                  </div>
+                  <div class="ai-stat-card card-cyan">
+                    <span class="stat-icon">🛣️</span>
+                    <div class="stat-body">
+                      <span class="stat-label">New / Extended Roads</span>
+                      <span class="stat-value val-cyan" id="hud-road-val">2.61 km</span>
+                    </div>
+                  </div>
+                  <div class="ai-stat-card card-total">
+                    <span class="stat-icon">📈</span>
+                    <div class="stat-body">
+                      <span class="stat-label">Total Significant Change</span>
+                      <span class="stat-value val-magenta" id="hud-total-val">39.11 ha</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Confidence & Method -->
+              <div class="ai-output-footer">
+                <div style="font-size: 11px; color: #94a3b8; font-family: var(--font-mono); line-height: 1.4;">
+                  <strong style="color: #00f5ff;">Model:</strong> Bi-temporal Deep Learning &bull; <strong style="color: #94a3b8;">Threshold:</strong> 0.65 &bull; <span style="color: #00f5ff; font-weight: 700;" id="hud-overall-conf">92.4% Overall Confidence</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Source & Provenance Expandable Panel -->
+        <div class="provenance-container">
+          <div class="provenance-header" id="provenance-accordion-toggle">
+            <div style="font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              Source Imagery, Calibration & Provenance Suite
+              <span class="badge badge-teal" style="font-size: 10px; margin-left: 6px;">W3C PROV-DM &bull; ISO 19115</span>
+            </div>
+            <span class="prov-arrow" style="font-size: 10px; color: var(--text-muted);">▼</span>
+          </div>
+          <div class="provenance-body" id="provenance-accordion-body">
+            
+            <!-- Provenance Navigation Tabs -->
+            <div class="prov-tab-bar">
+              <button class="prov-tab-btn active" data-prov-tab="prov-dm">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                W3C PROV-DM Graph
+              </button>
+              <button class="prov-tab-btn" data-prov-tab="iso-lineage">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                ISO 19115 Lineage Matrix
+              </button>
+              <button class="prov-tab-btn" data-prov-tab="prov-o">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                W3C PROV-O JSON-LD
+              </button>
+            </div>
+
+            <!-- Tab 1: W3C PROV-DM Graph -->
+            <div class="prov-tab-pane active" id="pane-prov-dm">
+              <div class="prov-dm-container">
+                <div class="prov-dm-header-badge">
+                  <span>RELATIONAL PROVENANCE DATA MODEL (W3C PROV-DM) &bull; RELATIVE TO DISPLAYED IMAGERY</span>
+                  <span style="color: var(--accent-cyan);" id="prov-digest-display">Digest: Computing...</span>
+                </div>
+                <div class="prov-graph-canvas" id="prov-dm-canvas">
+                  <!-- Dynamically populated via provenance.js -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab 2: ISO 19115 Lineage Matrix -->
+            <div class="prov-tab-pane" id="pane-iso-lineage">
+              <div class="iso-matrix-container" id="iso-matrix-container">
+                <!-- Dynamically populated via provenance.js -->
+              </div>
+            </div>
+
+            <!-- Tab 3: W3C PROV-O JSON-LD Viewer -->
+            <div class="prov-tab-pane" id="pane-prov-o">
+              <div class="prov-o-viewer">
+                <div class="prov-o-toolbar">
+                  <span style="font-size: 11px; font-family: var(--font-mono); color: var(--text-secondary);">
+                    Context: <a href="http://www.w3.org/ns/prov#" target="_blank" style="color: var(--accent-cyan); text-decoration: underline;">http://www.w3.org/ns/prov#</a>
+                  </span>
+                  <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-secondary" id="btn-copy-jsonld" style="font-size: 11px; padding: 4px 10px;">
+                      📋 Copy PROV-O JSON-LD
+                    </button>
+                    <button class="btn btn-primary" id="btn-download-jsonld" style="font-size: 11px; padding: 4px 10px;">
+                      ⬇️ Download .jsonld
+                    </button>
+                  </div>
+                </div>
+                <pre class="prov-o-code-pre" id="prov-o-code-block"></pre>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Analyst Review Action Bar -->
+        <div class="analyst-review-bar">
+          <div class="analyst-notice-group">
+            <div class="analyst-icon-shield">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <div class="analyst-notice-text">
+              <div class="analyst-notice-title">Analyst Review Action</div>
+              <div class="analyst-notice-desc" id="analyst-status-display">
+                AETHER is an analyst-support system. AI identifies candidate evidence; human analysts confirm operational decisions.
+              </div>
+            </div>
+          </div>
+          <div class="analyst-actions-group">
+            <button class="btn btn-success" id="analyst-confirm-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Confirm Change
+            </button>
+            <button class="btn btn-danger" id="analyst-reject-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              Reject Change
+            </button>
+            <button class="btn btn-warning" id="analyst-flag-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              Flag for Review
+            </button>
+            <button class="btn btn-secondary" id="export-dossier-btn" title="Download GeoJSON and Intelligence Summary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              Export Dossier
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         PAGE 4: ABOUT AETHER / METHODOLOGY
+         ======================================================== -->
+    <section class="page-view" id="page-about">
+      <div class="about-page">
+        
+        <!-- Header -->
+        <div class="about-header">
+          <h1 class="about-title">How AETHER Works</h1>
+          <p class="about-sub">From satellite archive to analyst-reviewed geospatial intelligence.</p>
+        </div>
+
+        <!-- 11-Step Interactive Pipeline -->
+        <div class="pipeline-card">
+          <div class="section-header-row">
+            <h2 class="section-title">11-Stage Processing & Retrieval Pipeline</h2>
+            <p class="section-desc">Click any stage below to inspect the mathematical formulation and Earth-observation standards.</p>
+          </div>
+          <div class="steps-strip" id="pipeline-steps-strip">
+            <!-- Rendered via methodology.js -->
+          </div>
+          <div class="pipeline-detail-card" id="pipeline-detail-card">
+            <div class="pipeline-detail-title" id="pipeline-step-title">Stage 01: Satellite Imagery</div>
+            <div style="font-size: 11px; font-family: var(--font-mono); color: var(--accent-cyan);" id="pipeline-step-stage">ARCHIVE INGESTION</div>
+            <div class="pipeline-detail-desc" id="pipeline-step-desc">
+              Ingests raw Top-Of-Atmosphere (TOA L1C) and Bottom-Of-Atmosphere (BOA L2A) granules from Copernicus Sentinel-2 (MSI), Sentinel-1 (C-SAR), Landsat Collection 2 (OLI), and Bhuvan/NRSC datasets.
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Core Concepts -->
+        <div>
+          <div class="section-header-row" style="margin-bottom: 16px;">
+            <h2 class="section-title">Core Computational Principles</h2>
+            <p class="section-desc">The algorithmic foundation of semantic Earth-observation retrieval.</p>
+          </div>
+          <div class="concepts-grid">
+            <div class="concept-card">
+              <div class="concept-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path></svg>
+                Embeddings
+              </div>
+              <p class="concept-desc">
+                Multimodal spatial-spectral representations that map multi-spectral satellite chips and natural-language text queries into a shared high-dimensional vector space.
+              </p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                Vector Search
+              </div>
+              <p class="concept-desc">
+                Sub-second approximate nearest neighbor (ANN) retrieval over multi-terabyte indexes, returning imagery whose semantic representations are closest to the analyst query.
+              </p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                Multi-Temporal Analysis
+              </div>
+              <p class="concept-desc">
+                Multi-epoch comparisons evaluating spectral indices (NDBI, MNDWI, NDVI) against historic seasonal baselines to isolate genuine anthropogenic developments from natural changes.
+              </p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                Provenance
+              </div>
+              <p class="concept-desc">
+                Cryptographic audit trail recording source satellite granule IDs, acquisition timestamps, sensor parameters, processing version, and analyst review status.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- False-Alarm Suppression Visual Matrix -->
+        <div class="matrix-container">
+          <div class="section-header-row">
+            <h2 class="section-title">False-Alarm Suppression Architecture</h2>
+            <p class="section-desc">How AETHER eliminates spurious change indicators caused by atmospheric, environmental, and geometric factors.</p>
+          </div>
+          <table class="matrix-table">
+            <thead>
+              <tr>
+                <th style="width: 25%;">EO Challenge</th>
+                <th style="width: 35%;">AETHER Technical Mitigation</th>
+                <th style="width: 40%;">Operational Impact</th>
+              </tr>
+            </thead>
+            <tbody id="matrix-table-body">
+              <!-- Rendered via methodology.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Data Sources Section -->
+        <div>
+          <div class="section-header-row" style="margin-bottom: 16px;">
+            <h2 class="section-title">Development & Evaluation Sources</h2>
+            <p class="section-desc">Public Earth-observation constellations supported in the AETHER architecture.</p>
+          </div>
+          <div class="sources-grid">
+            <div class="source-card">
+              <div class="source-name">Copernicus Sentinel-2</div>
+              <div class="source-type">MULTISPECTRAL (MSI)</div>
+              <div class="source-specs">13 Spectral Bands • 10m/20m GSD • 5-day revisit • Level-2A Bottom-Of-Atmosphere surface reflectance.</div>
+            </div>
+            <div class="source-card">
+              <div class="source-name">Copernicus Sentinel-1</div>
+              <div class="source-type">SYNTHETIC APERTURE RADAR (SAR)</div>
+              <div class="source-specs">C-Band SAR • All-weather & cloud-penetrating capability • Polarimetric VV+VH amplitude coherence.</div>
+            </div>
+            <div class="source-card">
+              <div class="source-name">USGS Landsat 8/9</div>
+              <div class="source-type">OPTICAL / THERMAL (OLI/TIRS)</div>
+              <div class="source-specs">Collection 2 Tier 1 • 30m multispectral resolution • Decadal multi-temporal baseline depth.</div>
+            </div>
+            <div class="source-card">
+              <div class="source-name">Bhuvan / NRSC</div>
+              <div class="source-type">INDIAN EO ARCHIVE (ISRO)</div>
+              <div class="source-specs">Cartosat / Resourcesat high-resolution regional archive layers for domestic territory evaluation.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Honest Limitations Section -->
+        <div class="limitations-card">
+          <div class="limitations-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            Current Engineering Limitations & Operational Boundaries
+          </div>
+          <ul class="limitations-list">
+            <li>Large geographic archives require significant local GPU vector caching and index memory.</li>
+            <li>Severe cloud overcast conditions in optical imagery require synthetic aperture radar (SAR) fallback data.</li>
+            <li>Sensor ground sampling distance (10m) sets the lower threshold for structural footprint resolution.</li>
+            <li>Extreme seasonal monsoon inundation can introduce complex hydrologic spectral variances requiring multi-year normalization.</li>
+            <li>AETHER is engineered as an <strong>analyst-support decision system</strong>; final operational determinations require qualified human verification.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SYSTEM DIAGNOSTICS / SETTINGS MODAL -->
+  <div class="modal-backdrop" id="settings-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          System Diagnostics & Offline Archive Status
+        </div>
+        <button class="icon-btn" id="settings-close-btn">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="meta-grid">
+          <div class="meta-item">
+            <span class="meta-key">Execution Mode</span>
+            <span class="meta-val" style="color: var(--accent-teal);">OFFLINE · ON-PREMISES</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-key">Archive Volume</span>
+            <span class="meta-val">1.4 TB (Indexed)</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-key">Indexed Chips</span>
+            <span class="meta-val">142,850 Tiles</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-key">Vector Engine</span>
+            <span class="meta-val">HNSW Cosine Space</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-key">Embedding Model</span>
+            <span class="meta-val">AETHER-GeoEmbed-v2</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-key">Co-Registration RMS</span>
+            <span class="meta-val">&lt; 0.18 pixels</span>
+          </div>
+        </div>
+        <div style="margin-top: 16px; font-size: 12px; color: var(--text-muted); line-height: 1.5;">
+          All Earth-observation tiles are stored and indexed within the secured local workstation directory. Vector retrieval and change vector analysis run entirely in-process without outbound telemetry.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="document.getElementById('settings-modal').classList.remove('open');">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-left">
+        <div class="footer-title">AETHER — Adaptive Earth-observation Temporal Hyper-semantic Engine for Retrieval</div>
+        <div class="footer-meta">Smart India Hackathon 2026 · Problem Statement 26227 · Prototype / Demonstration Interface</div>
+      </div>
+      <div class="footer-links">
+        <a onclick="window.AETHER_APP.navigateTo('overview')">Overview</a>
+        <span>·</span>
+        <a onclick="window.AETHER_APP.navigateTo('search')">Semantic Search</a>
+        <span>·</span>
+        <a onclick="window.AETHER_APP.navigateTo('change')">Change Analysis</a>
+        <span>·</span>
+        <a onclick="window.AETHER_APP.navigateTo('about')">Methodology</a>
+      </div>
+      <div class="footer-disclaimer">
+        Designed for analyst decision-support. Built with HTML5, CSS3, JavaScript, Node.js & Express.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Leaflet JS (Offline local bundle) -->
+  <script src="/js/leaflet.js"></script>
+
+  <!-- Application Logic Scripts -->
+  <script src="/js/data.js"></script>
+  <script src="/js/india-vector-basemap.js"></script>
+  <script src="/js/map.js"></script>
+  <script src="/js/search.js"></script>
+  <script src="/js/change-viewer.js"></script>
+  <script src="/js/provenance.js"></script>
+  <script src="/js/methodology.js"></script>
+  <script src="/js/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="640" height="640">
+  <!-- Linear highway corridor change -->
+  <polygon points="120,540 180,560 520,130 460,110" fill="rgba(249, 115, 22, 0.35)" stroke="#f97316" stroke-width="2.5" stroke-dasharray="6 3"/>
+  <polygon points="280,330 380,300 410,380 310,410" fill="rgba(239, 68, 68, 0.4)" stroke="#ef4444" stroke-width="2"/>
+  <rect x="110" y="90" width="430" height="490" fill="none" stroke="#38bdf8" stroke-width="1" stroke-dasharray="6 4"/>
+  <rect x="120" y="70" width="165" height="20" rx="3" fill="#0b1120" stroke="#f97316" stroke-width="1.5"/>
+  <text x="126" y="84" fill="#f97316" font-family="monospace" font-size="11" font-weight="bold">LINEAR: ARTERIAL ROAD</text>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="640" height="640">
+  <defs>
+    <filter id="glow-red" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#ef4444" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+  <!-- Primary structural expansion near river corridor -->
+  <polygon points="310,240 430,220 460,330 340,360" fill="rgba(239, 68, 68, 0.3)" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="6 3" filter="url(#glow-red)"/>
+  <rect x="350" y="260" width="70" height="60" fill="rgba(249, 115, 22, 0.4)" stroke="#f97316" stroke-width="2"/>
+  
+  <!-- Bridge approach & pier footing -->
+  <polygon points="260,310 320,295 340,370 280,385" fill="rgba(239, 68, 68, 0.35)" stroke="#ef4444" stroke-width="2"/>
+  
+  <!-- Bounding reticle & analyst annotations -->
+  <rect x="250" y="210" width="220" height="190" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="8 6"/>
+  <!-- Corner brackets -->
+  <path d="M245,225 L245,205 L265,205" fill="none" stroke="#38bdf8" stroke-width="3"/>
+  <path d="M475,225 L475,205 L455,205" fill="none" stroke="#38bdf8" stroke-width="3"/>
+  <path d="M245,385 L245,405 L265,405" fill="none" stroke="#38bdf8" stroke-width="3"/>
+  <path d="M475,385 L475,405 L455,405" fill="none" stroke="#38bdf8" stroke-width="3"/>
+  
+  <!-- Tactical badge -->
+  <rect x="250" y="185" width="160" height="22" rx="3" fill="#0b1120" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="256" y="200" fill="#ef4444" font-family="monospace" font-size="11" font-weight="bold">TARGET 01: STRUCTURAL</text>
+  <text x="415" y="200" fill="#38bdf8" font-family="monospace" font-size="10">94% CONF</text>
+</svg>
